@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Symbolix Config",
+  "properties": {
+    "check-minus": {
+      "type": "boolean"
+    },
+    "replace": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "required": [ "action", "find", "replace" ],
+            "properties": {
+              "action": {
+                "enum": [ "add" ]
+              },
+              "find": {
+                "type": "string"
+              },
+              "replace": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "required": [ "action", "find" ],
+            "properties": {
+              "action": {
+                "enum": [ "remove" ]
+              },
+              "find": {
+                "type": "string"
+              },
+              "replace": {
+                "type": "null"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "minus": {
+      "$ref": "#/definitions/replace-hyphen"
+    },
+    "en-dash": {
+      "$ref": "#/definitions/replace-hyphen"
+    },
+    "em-dash": {
+      "$ref": "#/definitions/replace-hyphen"
+    }
+  },
+  "definitions": {
+    "replace-hyphen": {
+      "type": "array",
+      "items": {
+        "required": [ "action", "find" ],
+        "properties": {
+          "action": {
+            "enum": [ "add", "remove" ]
+          },
+          "find": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
