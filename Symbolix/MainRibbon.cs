@@ -117,6 +117,8 @@ public sealed class MainRibbon : RibbonBase
         {
             var config = Config.Load(document.Path);
 
+            if (config.SaveBeforeRun) document.Save();
+
             if (config.CheckMinus)
             {
                 // Replace hyphens before numbers with minus signs.
@@ -150,6 +152,8 @@ public sealed class MainRibbon : RibbonBase
             ReplacePattern(config.MustBeMinus, MINUS);
             ReplacePattern(config.MustBeEnDash, EN_DASH);
             ReplacePattern(config.MustBeEmDash, EM_DASH);
+
+            if (config.SaveAfterRun) document.Save();
         }
         finally
         {

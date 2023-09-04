@@ -1,6 +1,7 @@
 ﻿
 // (c) 2023 Kazuki KOHZUKI
 
+using System.Runtime.InteropServices;
 using ApiDoc = Microsoft.Office.Interop.Word.Document;
 
 namespace Symbolix.Word;
@@ -64,4 +65,19 @@ internal sealed class Document
     {
         this._document = document;
     } // ctor (ApiDoc document)
+
+    /// <summary>
+    /// Saves the specified document. If the document hasn't been saved before, the Save As dialog box prompts the user for a file name.
+    /// </summary>
+    internal void Save()
+    {
+        try
+        {
+            this._document.Save();
+        }
+        catch (COMException e)
+        {
+            System.Diagnostics.Debug.WriteLine(e.Message);
+        }
+    } // internal void Save ()
 } // internal sealed class Document

@@ -15,6 +15,9 @@ namespace Symbolix;
 /// </summary>
 public sealed class ConfigJson
 {
+    [JsonPropertyName("save")]
+    public string[]? Save { get; set; }
+
     /// <summary>
     /// Gets or sets the check-minus.
     /// </summary>

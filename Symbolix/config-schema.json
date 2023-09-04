@@ -1,6 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Symbolix Config",
+  "save": {
+    "type": "array",
+    "items": {
+      "enum": [ "before", "after" ]
+    }
+  },
   "properties": {
     "check-minus": {
       "type": "boolean"

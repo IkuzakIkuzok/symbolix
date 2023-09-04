@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ReplacePatterns = System.Collections.Generic.List<Symbolix.ReplacePattern>;
 
 namespace Symbolix;
@@ -15,6 +16,10 @@ internal sealed class Config
     private const string FileName = ".symbolixconfig";
 
     private static readonly string primaryConfigPath;
+
+    internal bool SaveBeforeRun { get; private set; } = false;
+
+    internal bool SaveAfterRun { get; private set; } = true;
 
     internal bool CheckMinus { get; private set; } = true;
     internal ReplacePatterns SimpleReplacement { get; private set; } = new();
@@ -60,6 +65,12 @@ internal sealed class Config
         var jsonText = File.ReadAllText(filename);
         var json = ConfigJson.LoadJson(jsonText);
         if (json == null) return;
+
+        if (json.Save != null)
+        {
+            if (json.Save.Contains("before")) this.SaveBeforeRun = true;
+            if (json.Save.Contains("after")) this.SaveAfterRun = true;
+        }
 
         if (json.CheckMinus != null) this.CheckMinus = json.CheckMinus.Value;
 
