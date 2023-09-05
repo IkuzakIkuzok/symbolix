@@ -9,6 +9,8 @@ namespace Symbolix;
 
 public partial class ThisAddIn
 {
+    internal const string ProductName = "Symbolix";
+
     private void ThisAddIn_Startup(object? sender, EventArgs e)
     {
 

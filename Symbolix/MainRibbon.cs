@@ -3,10 +3,12 @@
 
 using Microsoft.Office.Tools.Ribbon;
 using Symbolix.Word;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Symbolix;
 
@@ -154,6 +156,10 @@ public sealed class MainRibbon : RibbonBase
             ReplacePattern(config.MustBeEmDash, EM_DASH);
 
             if (config.SaveAfterRun) document.Save();
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, ThisAddIn.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {

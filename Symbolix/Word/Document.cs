@@ -69,15 +69,7 @@ internal sealed class Document
     /// <summary>
     /// Saves the specified document. If the document hasn't been saved before, the Save As dialog box prompts the user for a file name.
     /// </summary>
+    /// <exception cref="COMException">Occurs when the operation was not completed successfully.</exception>
     internal void Save()
-    {
-        try
-        {
-            this._document.Save();
-        }
-        catch (COMException e)
-        {
-            System.Diagnostics.Debug.WriteLine(e.Message);
-        }
-    } // internal void Save ()
+        => this._document.Save();
 } // internal sealed class Document
